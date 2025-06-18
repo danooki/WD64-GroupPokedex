@@ -29,7 +29,3 @@ Features:
 JS Modules:
 pokedex.js – 
 favorites.js – read/write localStorage for favorite Pokémon
-
-
-
-
