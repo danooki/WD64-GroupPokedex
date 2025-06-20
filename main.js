@@ -1,3 +1,5 @@
+import pokemonDetailsModal from "./PokemonDetailsModal.js";
+
 fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
   .then((response) => {
     if (!response.ok) {
@@ -34,6 +36,17 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
           card.appendChild(num);
 
           pokemonContainer.appendChild(card);
+
+          // -------------------------Conni - more Deatils window Klick event--------------------------------------------
+
+          card.addEventListener("click", (e) => {
+            //here replace <placeholder> with your button variable name
+            if (e.target !== "<placeholder>") {
+              pokemonDetailsModal(pokeData);
+            }
+          });
+          //close button remove element
+          // -------------------------Conni - Over--------------------------------------------
         });
     });
   })
@@ -41,7 +54,7 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
     console.error("Something went wrong:", error);
   });
 
-// popup
+// Search dialog Popup
 
 const searchButton = document.getElementById("searchButton");
 const searchInput = document.getElementById("search");
