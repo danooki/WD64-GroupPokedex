@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Pokedex</title>
-    <script src="pokedex.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 
-  <body>
-    <nav class="flex justify-around bg-red-400 p-4">
-      <a
-        href="index.html"
-        class="text-2xl text-black-600 transition-transform duration-300 hover:scale-125 font-bold"
-      >
-        Home
-      </a>
-      <a
-        href="pokedex.html"
-        class="text-2xl text-black-600 transition-transform duration-300 hover:scale-125 font-bold"
-      >
-        Pokédex
-      </a>
-    </nav>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Pokedex</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="pokedexFav.js" type="module"></script>
+
+</head>
+
+<body>
+  <nav class="flex justify-around bg-red-400 p-4">
+    <a href="index.html" class="text-2xl text-black-600 transition-transform duration-300 hover:scale-125 font-bold">
+      Home
+    </a>
+    <a href="pokedex.html" class="text-2xl text-black-600 transition-transform duration-300 hover:scale-125 font-bold">
+      Pokédex
+    </a>
+  </nav>
+
+  <div>
+    <h1 class="text-2xl mt-10 font-bold text-center text-gray-700">Your Favorite Pokémon</h1>
+    <div id="favoriteContainer" class="flex flex-wrap justify-center gap-4 p-4">
+    </div>
+  </div>
+</body>
+
 </html>

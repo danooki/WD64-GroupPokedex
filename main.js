@@ -1,4 +1,8 @@
-import pokemonDetailsModal from "./PokemonDetailsModal.js";
+// main.js focus on the layout
+
+import pokemonDetailsModal from "./detailCard.js";
+import setupSearchHandler from "./searchHandler.js";
+import { createFavoriteButton } from "./favoriteStar.js";
 
 fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
   .then((response) => {
@@ -31,9 +35,13 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
           img.alt = pokeData.name;
           img.className = "mx-auto mb-2";
 
+          const favButton = createFavoriteButton(pokeData.id); // bring the fav button.
+          favButton.classList.add("favorite-button");
+
           card.appendChild(img);
           card.appendChild(name);
           card.appendChild(num);
+          card.appendChild(favButton);
 
           pokemonContainer.appendChild(card);
 
@@ -54,6 +62,17 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
     console.error("Something went wrong:", error);
   });
 
+// Search behaviour:
+setupSearchHandler();
+
+// Eliminated previous code
+//
+
+// main.js should handle only layout.
+//
+
+// PREVIOUS CODE. Conflict with latest detailCard.js
+/*  
 // Search dialog Popup
 
 const searchButton = document.getElementById("searchButton");
@@ -96,4 +115,4 @@ searchButton.addEventListener("click", () => {
 const closeBtn = document.getElementById("closePopup");
 closeBtn.addEventListener("click", () => {
   pokemonPopup.classList.add("hidden");
-});
+}); */

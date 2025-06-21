@@ -1,3 +1,7 @@
+// detailCard focus on the pop up card, or card with more information.
+
+import { createFavoriteButton } from "./favoriteStar.js";
+
 export default function pokemonDetailsModal(data) {
   const body = document.querySelector("body");
   //create outer container that takes up the whole site
@@ -21,6 +25,8 @@ export default function pokemonDetailsModal(data) {
 
   //put everything in body
   body.appendChild(outerContainer);
+  const favButton = createFavoriteButton(data.id); // brings fav button.
+  innerContainer.appendChild(favButton); // creates fav button.
 
   //Event listeners to close the Modal
   closeModalButton.addEventListener("click", (e) => {
