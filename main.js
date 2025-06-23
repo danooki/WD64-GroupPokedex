@@ -4,6 +4,7 @@ import pokemonDetailsModal from "./detailCard.js";
 import setupSearchHandler from "./searchHandler.js";
 import { createFavoriteButton } from "./favoriteStar.js";
 
+let allPokemonData = [];
 fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
   .then((response) => {
     if (!response.ok) {
@@ -14,48 +15,52 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
   .then((data) => {
     const pokemonContainer = document.getElementById("pokemonContainer");
 
-    data.results.forEach((pokemon) => {
-      fetch(pokemon.url)
-        .then((res) => res.json())
-        .then((pokeData) => {
-          const card = document.createElement("div");
-          card.className =
-            "border border-gray-300 p-4 w-40 text-center rounded shadow bg-white";
+    const pokemonPromises = data.results.map((pokemon) =>
+      fetch(pokemon.url).then((res) => res.json())
+    );
 
-          const name = document.createElement("h2");
-          name.textContent = pokeData.name;
-          name.className = "text-lg font-bold capitalize mb-2";
+    Promise.all(pokemonPromises).then((pokemonList) => {
+      allPokemonData = pokemonList.sort((a, b) => a.id - b.id);
 
-          const num = document.createElement("p");
-          num.textContent = `#${pokeData.id}`;
-          num.className = "text-sm text-gray-600 mb-2";
+      allPokemonData.forEach((pokeData) => {
+        const card = document.createElement("div");
+        card.className =
+          "border border-gray-300 p-4 w-40 text-center rounded shadow bg-white";
 
-          const img = document.createElement("img");
-          img.src = pokeData.sprites.front_default;
-          img.alt = pokeData.name;
-          img.className = "mx-auto mb-2";
+        const name = document.createElement("h2");
+        name.textContent = pokeData.name;
+        name.className = "text-lg font-bold capitalize mb-2";
 
-          const favButton = createFavoriteButton(pokeData.id); // bring the fav button.
-          favButton.classList.add("favorite-button");
+        const num = document.createElement("p");
+        num.textContent = `#${pokeData.id}`;
+        num.className = "text-sm text-gray-600 mb-2";
 
-          card.appendChild(img);
-          card.appendChild(name);
-          card.appendChild(num);
-          card.appendChild(favButton);
+        const img = document.createElement("img");
+        img.src = pokeData.sprites.front_default;
+        img.alt = pokeData.name;
+        img.className = "mx-auto mb-2";
 
-          pokemonContainer.appendChild(card);
+        const favButton = createFavoriteButton(pokeData.id); // bring the fav button.
+        favButton.classList.add("favorite-button");
 
-          // -------------------------Conni - more Deatils window Klick event--------------------------------------------
+        card.appendChild(img);
+        card.appendChild(name);
+        card.appendChild(num);
+        card.appendChild(favButton);
 
-          card.addEventListener("click", (e) => {
-            //here replace <placeholder> with your button variable name
-            if (e.target !== "<placeholder>") {
-              pokemonDetailsModal(pokeData);
-            }
-          });
-          //close button remove element
-          // -------------------------Conni - Over--------------------------------------------
+        pokemonContainer.appendChild(card);
+
+        // -------------------------Conni - more Deatils window Klick event--------------------------------------------
+
+        card.addEventListener("click", (e) => {
+          //here replace <placeholder> with your button variable name
+          if (e.target !== "<placeholder>") {
+            pokemonDetailsModal(pokeData);
+          }
         });
+        //close button remove element
+        // -------------------------Conni - Over--------------------------------------------
+      });
     });
   })
   .catch((error) => {
