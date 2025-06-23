@@ -1,6 +1,6 @@
 // main.js focus on the layout
 
-import pokemonDetailsModal from "./detailCard.js";
+import pokemonDetails from "./detailCard.js";
 import setupSearchHandler from "./searchHandler.js";
 import { createFavoriteButton } from "./favoriteStar.js";
 
@@ -50,7 +50,7 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
           card.addEventListener("click", (e) => {
             //here replace <placeholder> with your button variable name
             if (e.target !== "<placeholder>") {
-              pokemonDetailsModal(pokeData);
+              pokemonDetails(pokeData);
             }
           });
           //close button remove element

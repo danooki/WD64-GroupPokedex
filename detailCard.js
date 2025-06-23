@@ -28,45 +28,61 @@ export default function pokemonDetailsModal(data) {
       //create the innerContainer
       const innerContainer = document.createElement("div");
       innerContainer.className =
-        "w-[70vw] h-[60vh] border-4 border-red-800 bg-blue-800 fixed ";
+        "w-[70rem] h-[40rem] rounded-[4vw] bg-blue-800 fixed flex justify-between p-10";
       outerContainer.appendChild(innerContainer);
+
+      //create more Divs
+
+      const leftContainer = document.createElement("div");
+      leftContainer.classList = "w-[33%] flex flex-col";
+      innerContainer.appendChild(leftContainer);
+
+      const middleContainer = document.createElement("div");
+      middleContainer.classList = "w-[33%] flex flex-col justify-center";
+      innerContainer.appendChild(middleContainer);
+
+      const rightContainer = document.createElement("div");
+      rightContainer.classList = "w-[33%] flex flex-col justify-between";
+      innerContainer.appendChild(rightContainer);
 
       // NAME
       const pokemonName = document.createElement("h2");
       pokemonName.textContent = `${data.name}`;
-      innerContainer.appendChild(pokemonName);
+      pokemonName.classList = "text-[3.5rem]";
+      middleContainer.appendChild(pokemonName);
 
       // TYPES
       const types = document.createElement("p");
       types.textContent = `${data.types[0].type.name}${
         data.types[1] ? "/" : ""
       }${data.types[1] ? data.types[1].type.name : ""}`;
-      pokemonName.appendChild(types);
+      leftContainer.appendChild(types);
 
       // IMAGE
 
       const pokemonImg = new Image();
       pokemonImg.src = `${data.sprites.other["official-artwork"]["front_default"]}`;
-      pokemonImg.classList = "h-[20rem]";
-      types.appendChild(pokemonImg);
-
-      // SPECIES DESCRIPTION
-      const descriptionText = document.createElement("p");
-      descriptionText.textContent = `${description}`;
-      innerContainer.appendChild(descriptionText);
+      pokemonImg.classList = "h-[50%]";
+      middleContainer.appendChild(pokemonImg);
 
       //Button
       const closeModalButton = document.createElement("button");
       closeModalButton.textContent = "X";
       closeModalButton.className =
         "text-4xl ml-[60%] border-4 border-red-800 py-5 px-5";
-      innerContainer.appendChild(closeModalButton);
+      rightContainer.appendChild(closeModalButton);
+
+      // SPECIES DESCRIPTION
+      const descriptionText = document.createElement("p");
+      descriptionText.textContent = `${description}`;
+      rightContainer.appendChild(descriptionText);
 
       //put everything in body
       body.appendChild(outerContainer);
-      //
+
+      //FAVOURITE
       const favButton = createFavoriteButton(data.id); // brings fav button.
-      innerContainer.appendChild(favButton); // creates fav button.
+      leftContainer.appendChild(favButton); // creates fav button.
 
       //Event listeners to close the Modal
       closeModalButton.addEventListener("click", (e) => {
