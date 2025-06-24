@@ -1,0 +1,12 @@
+{
+  "name": "my-parcel-app",
+  "source": "index.html",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build",
+    "test": "echo Hello welcome to the super test!"
+  },
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  }
+}
