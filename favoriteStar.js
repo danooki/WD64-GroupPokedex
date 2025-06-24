@@ -7,9 +7,9 @@ export function createFavoriteButton(pokemonId) {
   updateStarIcon(btn, pokemonId);
 
   btn.alt = "Favorite";
-  btn.style.width = "24px";
-  btn.style.height = "24px";
-  btn.style.cursor = "pointer";
+  btn.style.width = "32px";
+  btn.style.height = "32px";
+  btn.style.cursor = "pointer"; // changes to hand (called pointer)
 
   btn.addEventListener("click", (e) => {
     e.stopPropagation(); // avoid triggering card/modal click
@@ -21,7 +21,10 @@ export function createFavoriteButton(pokemonId) {
 }
 
 function updateStarIcon(btn, pokemonId) {
-  btn.src = isFavorite(pokemonId)
-    ? "https://cdn-icons-png.flaticon.com/512/4208/4208420.png"
-    : "https://cdn-icons-png.flaticon.com/512/4208/4208394.png";
+  const isFav = isFavorite(pokemonId);
+  btn.src = isFav
+    ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png" // yes
+    : "https://images.icon-icons.com/2248/PNG/512/pokeball_icon_136305.png"; // empty
+
+  btn.style.opacity = isFav ? "1" : "0.4"; // makes the empty version more gray - transparent.
 }
