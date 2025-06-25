@@ -1,6 +1,7 @@
 // detailCard focus on the pop up card, or card with more information.
 
 import { createFavoriteButton } from "./favoriteStar.js";
+import { saveNote, getNote, isNoteChanged } from "./notes.js";
 
 //-----------------------------------------------------------------------------------------------
 
@@ -83,6 +84,30 @@ export default function pokemonDetailsModal(data) {
       //FAVOURITE
       const favButton = createFavoriteButton(data.id); // brings fav button.
       leftContainer.appendChild(favButton); // creates fav button.
+
+      // TEXTAREA
+      const note = document.createElement("textarea");
+      note.value = getNote(data.id);
+      rightContainer.appendChild(note);
+
+      note.addEventListener("input", () => {
+        if (isNoteChanged(data.id, note.value) || note.value == "") {
+          saveNoteButton.removeAttribute("disabled");
+        } else {
+          saveNoteButton.setAttribute("disabled", true);
+        }
+      });
+
+      // NOTE button
+      const saveNoteButton = document.createElement("button");
+      saveNoteButton.textContent = "save";
+      saveNoteButton.classList = "border-2 border-black";
+      rightContainer.appendChild(saveNoteButton);
+
+      saveNoteButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        saveNote(data.id, note.value);
+      });
 
       //Event listeners to close the Modal
       closeModalButton.addEventListener("click", (e) => {

@@ -25,9 +25,8 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
 
           card.addEventListener("click", (e) => {
             //here replace <placeholder> with your button variable name
-            if (e.target !== "<placeholder>") {
-              pokemonDetails(pokeData);
-            }
+
+            pokemonDetails(pokeData);
           });
           //close button remove element
           // -------------------------Conni - Over--------------------------------------------
