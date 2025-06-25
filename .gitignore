@@ -1,0 +1,9 @@
+# Parcel output and cache
+dist/
+.parcel-cache/
+
+# Node dependencies
+node_modules/
+
+# Editor settings (optional, but common)
+.vscode/
