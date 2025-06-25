@@ -1,6 +1,7 @@
 // main.js focus on the layout
 // main.js
 
+import pokemonDetailsModal from "./detailCard.js";
 import { createListCard } from "./listCard.js";
 import setupSearchHandler from "./searchHandler.js";
 
