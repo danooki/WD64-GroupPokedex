@@ -1,12 +1,28 @@
 // listCard.js handles rendering of a single Pokémon list card for main list view
 
 import { createFavoriteButton } from "./favoriteStar.js";
+import { isFavorite } from "./favorite.js";
 import pokemonDetailsModal from "./detailCard.js";
 
 export function createListCard(pokeData) {
   const card = document.createElement("div");
-  card.className =
+
+  // base classes
+  let cardClass =
+    "p-4 w-48 text-center rounded shadow bg-white transition-all duration-300";
+
+  // Add red border if favorited, else default border
+  if (isFavorite(pokeData.id)) {
+    cardClass += " border border-red-600"; // Nintendo-style red
+  } else {
+    cardClass += " border border-gray-200";
+  }
+
+  card.className = cardClass;
+
+  /*   card.className =
     "border border-gray-200 p-4 w-48 text-center rounded shadow bg-white";
+ */
 
   const name = document.createElement("h2");
   name.textContent = pokeData.name;
