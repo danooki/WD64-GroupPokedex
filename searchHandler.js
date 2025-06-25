@@ -6,7 +6,7 @@ export default function setupSearchHandler() {
   const searchInput = document.getElementById("search");
   const searchButton = document.getElementById("searchButton");
 
-  searchButton.addEventListener("click", () => {
+  function handleSearch() {
     const query = searchInput.value.trim().toLowerCase();
     if (!query) {
       alert("Please enter a Pokémon name or number.");
@@ -21,11 +21,21 @@ export default function setupSearchHandler() {
         return response.json();
       })
       .then((data) => {
-        detailCard(data); // ✅ Use shared detail modal
+        detailCard(data); // opens the detailCard.js
       })
       .catch((error) => {
         console.error("Error fetching Pokémon:", error);
         alert("Pokémon not found or error occurred.");
       });
+  }
+
+  // searchButton activates handleSearch function.
+  searchButton.addEventListener("click", handleSearch);
+
+  // enter key can also call handleSearch function.
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
   });
 }
