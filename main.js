@@ -1,7 +1,7 @@
 // main.js focus on the layout
 // main.js
 
-import pokemonDetails from "./detailCard.js";
+import pokemonDetailsModal from "./detailCard.js";
 import { createListCard } from "./listCard.js";
 import setupSearchHandler from "./searchHandler.js";
 
@@ -20,16 +20,6 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
         .then((pokeData) => {
           const card = createListCard(pokeData);
           pokemonContainer.appendChild(card);
-
-          // -------------------------Conni - more Deatils window Klick event--------------------------------------------
-
-          card.addEventListener("click", (e) => {
-            //here replace <placeholder> with your button variable name
-
-            pokemonDetails(pokeData);
-          });
-          //close button remove element
-          // -------------------------Conni - Over--------------------------------------------
         });
     });
   })
