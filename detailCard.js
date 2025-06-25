@@ -30,12 +30,7 @@ export default function pokemonDetailsModal(data) {
       //create the innerContainer
       const innerContainer = document.createElement("div");
       innerContainer.className =
-        "w-[70rem] h-[40rem] rounded-[4vw] fixed flex justify-around p-10";
-      innerContainer.style.backgroundImage =
-        "url(./src/pokemonCardBackground/4932198.jpg)";
-      innerContainer.style.backgroundSize = "cover";
-      innerContainer.style.backgroundPosition = "center";
-
+        "w-[70rem] h-[40rem] rounded-[4vw] bg-[url(./pokemonCardBackground/4932198.jpg)] fixed flex justify-around p-10";
       outerContainer.appendChild(innerContainer);
 
       //create more Divs
